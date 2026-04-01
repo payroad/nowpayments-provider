@@ -76,7 +76,7 @@ final class NOWPaymentsProvider implements RefundableCryptoProviderInterface
         Money                $amount,
         CryptoAttemptContext $context,
     ): CryptoPaymentAttempt {
-        $priceAmount   = bcdiv((string) $amount->getMinorAmount(), bcpow('10', (string) $amount->getCurrency()->precision, 0), $amount->getCurrency()->precision);
+        $priceAmount   = bcdiv($amount->getMinorAmountString(), bcpow('10', (string) $amount->getCurrency()->precision, 0), $amount->getCurrency()->precision);
         $priceCurrency = strtolower($amount->getCurrency()->code);
 
         $response = $this->post('/payment', [
@@ -119,7 +119,7 @@ final class NOWPaymentsProvider implements RefundableCryptoProviderInterface
         string              $originalProviderReference,
         CryptoRefundContext $context,
     ): CryptoRefund {
-        $amountDecimal = bcdiv((string) $amount->getMinorAmount(), bcpow('10', (string) $amount->getCurrency()->precision, 0), $amount->getCurrency()->precision);
+        $amountDecimal = bcdiv($amount->getMinorAmountString(), bcpow('10', (string) $amount->getCurrency()->precision, 0), $amount->getCurrency()->precision);
 
         // Retrieve original payment to determine the pay_currency for the refund
         $original = $this->get('/payment/' . $originalProviderReference);
