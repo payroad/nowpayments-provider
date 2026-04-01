@@ -100,6 +100,7 @@ final class NOWPaymentsProvider implements RefundableCryptoProviderInterface
 
         $attempt = CryptoPaymentAttempt::create($id, $paymentId, $providerName, $amount, $data);
         $attempt->setProviderReference((string) $response['payment_id']);
+        $attempt->markAwaitingConfirmation('waiting');
 
         return $attempt;
     }
