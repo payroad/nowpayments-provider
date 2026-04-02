@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Payroad\Provider\NOWPayments\Data;
 
-use Payroad\Domain\PaymentFlow\Crypto\CryptoAttemptData;
+use Payroad\Domain\Channel\Crypto\CryptoAttemptData;
 
 final class NOWPaymentsCryptoAttemptData implements CryptoAttemptData
 {
